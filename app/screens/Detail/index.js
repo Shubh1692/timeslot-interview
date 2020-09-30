@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {View, Button, TextInput, Text} from 'react-native';
+import {View, TextInput, Text} from 'react-native';
 import {connect} from 'react-redux';
 import {onAddDetail} from '../../actions/timeslot';
 import {styles} from './style';
@@ -133,12 +133,7 @@ class Detail extends Component {
                 style={styles.btnSection}
                 onPress={handleSubmit}
                 color="#841584">
-                <Text
-                  style={{
-                    color: '#fff',
-                    fontWeight: 'bold',
-                    textAlign: 'center',
-                  }}>
+                <Text style={styles.btnTxt}>
                   {selectedSlot ? 'Update' : 'Add'}
                 </Text>
               </TouchableOpacity>

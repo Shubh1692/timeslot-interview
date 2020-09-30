@@ -11,10 +11,10 @@ export default function user(
   switch (action.type) {
     // Reducer switch for add update slot details
     case ON_ADD_DETAIL:
-      fieldSlot[action.slotId] = action.detail;
+      fieldSlot[action.slotId] = {...action.detail};
       return {
         ...state,
-        fieldSlot,
+        fieldSlot: {... fieldSlot},
         selectedSlot: null,
       };
     // Reducer switch for set selected slot detail in store variable

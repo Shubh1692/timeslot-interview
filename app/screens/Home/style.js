@@ -78,4 +78,10 @@ export const styles = StyleSheet.create({
     height: 60,
     justifyContent: 'center',
   },
+  btnTxt: {
+    color: '#fff',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    width: '100%',
+  },
 });

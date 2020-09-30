@@ -134,15 +134,7 @@ class Home extends Component {
                 style={styles.btnSection}
                 onPress={() => this.showGallery()}
                 color="#841584">
-                <Text
-                  style={{
-                    color: '#fff',
-                    fontWeight: 'bold',
-                    textAlign: 'center',
-                    width: '100%',
-                  }}>
-                  Show Gallery
-                </Text>
+                <Text style={styles.btnTxt}>Show Gallery</Text>
               </TouchableOpacity>
             </View>
           </View>
