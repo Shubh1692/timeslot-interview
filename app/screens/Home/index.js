@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {View, Text, ScrollView} from 'react-native';
+import {View, Text, ScrollView, Platform} from 'react-native';
 import moment from 'moment';
 import {fetchDetailById} from '../../actions/timeslot';
 import {styles} from './style';
-
+import ImagePicker from 'react-native-image-picker';
 import {connect} from 'react-redux';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import {request, PERMISSIONS, RESULTS} from 'react-native-permissions';
 const slotConfig = {
   nextSlot: 60,
   startTime: '9:00',
@@ -53,16 +54,60 @@ class Home extends Component {
     });
   }
 
+  async showGallery() {
+    const result = await request(
+      Platform.select({
+        android: PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE,
+        ios: PERMISSIONS.IOS.PHOTO_LIBRARY,
+      }),
+    );
+    switch (result) {
+      case RESULTS.UNAVAILABLE:
+        console.info(
+          'This feature is not available (on this device / in this context)',
+        );
+        break;
+      case RESULTS.DENIED:
+        console.info(
+          'The permission has not been requested / is denied but requestable',
+        );
+        break;
+      case RESULTS.GRANTED:
+        const options = {
+          title: 'Gallery',
+          storageOptions: {
+            skipBackup: true,
+            path: 'images',
+          },
+        };
+        ImagePicker.launchImageLibrary(options, (response) => {
+          console.info('Response = ', response);
+          if (response.didCancel) {
+            console.info('User cancelled image picker');
+          } else if (response.error) {
+            console.info('ImagePicker Error: ', response.error);
+          } else {
+            const source = {uri: response.uri};
+            console.info(source);
+          }
+        });
+
+        break;
+      case RESULTS.BLOCKED:
+        console.info('The permission is denied and not requestable anymore');
+        break;
+    }
+  }
+
   render() {
     const {slots} = this.state;
     const {fieldSlot} = this.props;
-    console.log('styles', styles);
     return (
       <View style={styles.container}>
         <View style={styles.titleSection}>
           <Text style={styles.title}>Select Time Slot</Text>
         </View>
-        <ScrollView contentContainerStyle={{flexGrow:1}}>
+        <ScrollView contentContainerStyle={{flexGrow: 1}}>
           <View style={styles.innerContainer}>
             {slots.map(({id, title}) => (
               <View
@@ -84,6 +129,22 @@ class Home extends Component {
                 </TouchableOpacity>
               </View>
             ))}
+            <View style={styles.btntopSection}>
+              <TouchableOpacity
+                style={styles.btnSection}
+                onPress={() => this.showGallery()}
+                color="#841584">
+                <Text
+                  style={{
+                    color: '#fff',
+                    fontWeight: 'bold',
+                    textAlign: 'center',
+                    width: '100%',
+                  }}>
+                  Show Gallery
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </ScrollView>
       </View>

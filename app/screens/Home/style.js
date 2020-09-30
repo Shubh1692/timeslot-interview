@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
     paddingTop: 20,
     flexWrap: 'wrap',
     paddingHorizontal: 10,
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
   },
   innerContainer: {
     flexDirection: 'row',
@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
   item: {
     width: '44%',
     borderRadius: 5,
-    height: '21.7%',
+    height: '19.7%',
     marginTop: 10,
     margin: '1%',
     overflow: 'hidden',
@@ -62,5 +62,20 @@ export const styles = StyleSheet.create({
   white: {
     backgroundColor: 'white',
     color: 'black',
+  },
+  btnSection: {
+    backgroundColor: '#990000',
+    justifyContent: 'center',
+    minHeight: 60,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  btntopSection: {
+    width: '90%',
+    marginHorizontal: 20,
+    borderRadius: 5,
+    marginTop: 20,
+    height: 60,
+    justifyContent: 'center',
   },
 });

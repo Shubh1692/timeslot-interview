@@ -22,7 +22,7 @@ export const styles = StyleSheet.create({
     height: 70,
     marginVertical: 10,
   },
-  inputSection:{
+  inputSection: {
     backgroundColor: '#FFF',
     width: '90%',
     borderColor: '#999',
