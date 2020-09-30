@@ -1,0 +1,2 @@
+export const ON_ADD_DETAIL = 'ON_ADD_DETAIL';
+export const FETCH_DETAIL_BY_ID = 'FETCH_DETAIL_BY_ID';
